@@ -1,19 +1,10 @@
-#!/bin/bash
-#
-# Thanks to Tkkg1994 and djb77 for the script
-#
-# MoRoKernel Build Script v1.2
-#
-# For
-#
-# Ultimate-Kernel
-#
+#!/bin/sh
 
 # SETUP
 # -----
 export ARCH=arm64
 export SUBARCH=arm64
-export BUILD_CROSS_COMPILE=/home/enes_aosp_007/LineageOS/prebuilts/linaro/linux-x86/aarch64/bin/aarch64-linux-gnu-
+export BUILD_CROSS_COMPILE=aarch64-linux-gnu-
 export CROSS_COMPILE=$BUILD_CROSS_COMPILE
 export BUILD_JOB_NUMBER=`grep processor /proc/cpuinfo|wc -l`
 export USE_CCACHE=1
@@ -29,13 +20,13 @@ INCDIR=$RDIR/include
 PAGE_SIZE=2048
 DTB_PADDING=0
 
-DEFCONFIG=ultimate_defconfig
-DEFCONFIG_S6EDGE=ultimate_defconfig_edge
-DEFCONFIG_S6FLAT=ultimate_defconfig_flat
-TMOBILE_DEFCONFIG=ultimate_defconfig_tmobile
+DEFCONFIG=defconfig
+DEFCONFIG_S6EDGE=defconfig_edge
+DEFCONFIG_S6FLAT=defconfig_flat
+TMOBILE_DEFCONFIG=defconfig_tmobile
 
-export K_VERSION="v1.3.1"
-export K_NAME="Ultimate-Kernel"
+export K_VERSION="v69.420"
+export K_NAME="ArchBTW"
 export REVISION="RC"
 export KBUILD_BUILD_VERSION="1"
 S6DEVICE="Nougat"
@@ -251,10 +242,6 @@ MAIN2()
 # PROGRAM START
 # -------------
 clear
-echo "**********************************"
-echo "Ultimate-Kernel Build Script"
-echo "**********************************"
-echo ""
 echo ""
 echo "Build Kernel for:"
 echo ""
@@ -286,7 +273,7 @@ elif [ $prompt == "2" ]; then
     KERNEL_DEFCONFIG=$DEFCONFIG_S6EDGE
     TMOBILE=0
     LOG=$EDGE_LOG
-    export KERNEL_VERSION="$K_NAME-Pie-$K_VERSION"
+    export KERNEL_VERSION="$K_NAME-Nougat-$K_VERSION"
     echo "S6 Edge G925F Selected"
     ZIP_NAME=$K_NAME-$MODEL-N-$K_VERSION.zip
     MAIN
@@ -296,7 +283,7 @@ elif [ $prompt == "3" ]; then
     KERNEL_DEFCONFIG=$DEFCONFIG_S6EDGE
     TMOBILE=0
     LOG=$EDGE_LOG
-    export KERNEL_VERSION="$K_NAME-Pie-$K_VERSION"
+    export KERNEL_VERSION="$K_NAME-Nougat-$K_VERSION"
     echo "S6 EDGE + FLAT International Selected"
     echo "Compiling EDGE ..."
     MAIN2
@@ -304,7 +291,7 @@ elif [ $prompt == "3" ]; then
     KERNEL_DEFCONFIG=$DEFCONFIG_S6FLAT
     TMOBILE=0
     LOG=$FLAT_LOG
-    export KERNEL_VERSION="$K_NAME-Oreo-$K_VERSION"
+    export KERNEL_VERSION="$K_NAME-Nougat-$K_VERSION"
     echo "Compiling FLAT ..."
     ZIP_NAME=$K_NAME-G92X-N-$K_VERSION.zip
     MAIN
@@ -314,7 +301,7 @@ elif [ $prompt == "4" ]; then
     KERNEL_DEFCONFIG=$DEFCONFIG_S6FLAT
     TMOBILE=1
     LOG=$FLAT_LOG
-    export KERNEL_VERSION="$K_NAME-Pie-$K_VERSION"
+    export KERNEL_VERSION="$K_NAME-Nougat-$K_VERSION"
     echo "S6 Flat G920T Selected"
     ZIP_NAME=$K_NAME-$MODELT-N-$K_VERSION.zip
     MAIN
@@ -324,7 +311,7 @@ elif [ $prompt == "5" ]; then
     KERNEL_DEFCONFIG=$DEFCONFIG_S6EDGE
     TMOBILE=1
     LOG=$EDGE_LOG
-    export KERNEL_VERSION="$K_NAME-Pie-$K_VERSION"
+    export KERNEL_VERSION="$K_NAME-Nougat-$K_VERSION"
     echo "S6 Edge G925T Selected"
     ZIP_NAME=$K_NAME-$MODELT-N-$K_VERSION.zip
     MAIN
@@ -334,7 +321,7 @@ elif [ $prompt == "6" ]; then
     KERNEL_DEFCONFIG=$DEFCONFIG_S6EDGE
     TMOBILE=1
     LOG=$EDGE_LOG
-    export KERNEL_VERSION="$K_NAME-Pie-$K_VERSION"
+    export KERNEL_VERSION="$K_NAME-Nougat-$K_VERSION"
     echo "S6 EDGE + FLAT Tmobile Selected"
     echo "Compiling EDGE ..."
     MAIN2
@@ -342,7 +329,7 @@ elif [ $prompt == "6" ]; then
     KERNEL_DEFCONFIG=$DEFCONFIG_S6FLAT
     TMOBILE=1
     LOG=$FLAT_LOG
-    export KERNEL_VERSION="$K_NAME-Oreo-$K_VERSION"
+    export KERNEL_VERSION="$K_NAME-Nougat-$K_VERSION"
     echo "Compiling FLAT ..."
     ZIP_NAME=$K_NAME-G92XT-N-$K_VERSION.zip
     MAIN
