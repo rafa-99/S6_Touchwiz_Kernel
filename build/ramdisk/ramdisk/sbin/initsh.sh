@@ -33,4 +33,24 @@ for FILE in /system/etc/init.d/*; do
 	sh $FILE >/dev/null
 done;
 
+if [ ! -f /su/xbin/busybox ]; then
+	BB=/system/xbin/busybox;
+else
+	BB=/su/xbin/busybox;
+fi;
+
+# Mount rootfs and system as RW
+
+mount -o rw,remount rootfs;
+
+# Synapse
+
+chmod -R 755 /res/*;
+
+# Create uci link if not present
+
+if [ ! -e /system/bin/uci ]; then
+     ln -s /res/synapse/uci /system/bin/uci
+fi
+
 #####################################################################
