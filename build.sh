@@ -100,21 +100,19 @@ elif [ $prompt == "6" ]; then
     echo "Compiling FLAT ..."
 fi
 
-cp -f $RDIR/arch/$ARCH/configs/$DEFCONFIG $RDIR/.config
-cat $RDIR/arch/$ARCH/configs/$KERNEL_DEFCONFIG >> $RDIR/.config
+cp -f $RDIR/arch/$ARCH/configs/$DEFCONFIG $RDIR/arch/$ARCH/configs/new_defconfig
+cat $RDIR/arch/$ARCH/configs/$KERNEL_DEFCONFIG >> $RDIR/arch/$ARCH/configs/new_defconfig
 
 if [ $TMOBILE == "1" ]; then
-	cat $RDIR/arch/$ARCH/configs/$TMOBILE_DEFCONFIG >> $RDIR/.config
+	cat $RDIR/arch/$ARCH/configs/$TMOBILE_DEFCONFIG >> $RDIR/arch/$ARCH/configs/new_defconfig
 fi
 
 # MAKE
 # ---------
 
 	make -j$BUILD_JOB_NUMBER ARCH=$ARCH \
-			CROSS_COMPILE=$BUILD_CROSS_COMPILE \
-			tmp_defconfig || exit -1
-	make -j$BUILD_JOB_NUMBER ARCH=$ARCH \
-			CROSS_COMPILE=$BUILD_CROSS_COMPILE || exit -1
+			new_defconfig || exit -1
+	make -j$BUILD_JOB_NUMBER || exit -1
 	echo ""
 	mkdir -p "modules_output"
 	make INSTALL_MOD_PATH=$RDIR/modules_output
